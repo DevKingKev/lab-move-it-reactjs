@@ -1,6 +1,6 @@
-import "./App.css"
-import { Counter } from "./features/counter/Counter"
-import { Quotes } from "./features/quotes/Quotes"
+import "./App.scss"
+import { Counter } from "./components/Counter"
+import { Quotes } from "./components/Quotes"
 import logo from "./logo.svg"
 
 export const App = () => (
