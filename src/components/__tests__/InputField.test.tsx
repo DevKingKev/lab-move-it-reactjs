@@ -22,11 +22,7 @@ describe("InputField", () => {
   test("capitalizes label", () => {
     const handleChange = vi.fn()
     renderWithProviders(
-      <InputField
-        label="lowercase label"
-        value=""
-        onChange={handleChange}
-      />,
+      <InputField label="lowercase label" value="" onChange={handleChange} />,
     )
 
     expect(screen.getByText("LOWERCASE LABEL")).toBeInTheDocument()
