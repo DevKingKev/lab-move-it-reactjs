@@ -7,7 +7,7 @@ import {
   Button,
   RadioButton,
 } from "../components"
-import "./PreOffer.module.scss"
+import styles from "./PreOffer.module.scss"
 
 const PreOffer = () => {
   const dispatch = useAppDispatch()
@@ -27,11 +27,11 @@ const PreOffer = () => {
   }
 
   return (
-    <div className="pre-offer">
-      <div className="pre-offer__container">
-        <h2 className="pre-offer__title">Pre-offer for home moving</h2>
+    <div className={styles.preOffer}>
+      <div className={styles.preOffer__container}>
+        <h2 className={styles.preOffer__title}>Pre-offer for home moving</h2>
 
-        <form className="pre-offer__form" onSubmit={handleSubmit}>
+        <form className={styles.preOffer__form} onSubmit={handleSubmit}>
           {/* Step 1: Contact Details */}
           <Card step="1" header="Contact details">
             <FormSection layout="grid">
@@ -147,7 +147,7 @@ const PreOffer = () => {
           </Card>
 
           {/* Submit Button */}
-          <div className="pre-offer__button-container">
+          <div className={styles.preOffer__buttonContainer}>
             <Button type="submit" fullWidth>
               Request an offer
             </Button>

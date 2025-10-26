@@ -1,22 +1,22 @@
-import "./Confirmation.module.scss"
+import styles from "./Confirmation.module.scss"
 
 const Confirmation = () => {
   return (
-    <div className="confirmation">
-      <div className="confirmation__container">
-        <h2 className="confirmation__title">Your Moving Quote</h2>
+    <div className={styles.confirmation}>
+      <div className={styles.confirmation__container}>
+        <h2 className={styles.confirmation__title}>Your Moving Quote</h2>
 
-        <div className="confirmation__content">
-          <div className="confirmation__price-section">
+        <div className={styles.confirmation__content}>
+          <div className={styles.confirmation__priceSection}>
             {/* Price display component will be added here */}
-            <div className="confirmation__price-placeholder">
+            <div className={styles.confirmation__pricePlaceholder}>
               <p>Price display will be shown here...</p>
             </div>
           </div>
 
-          <div className="confirmation__details-section">
+          <div className={styles.confirmation__detailsSection}>
             {/* Details summary components will be added here */}
-            <div className="confirmation__details-placeholder">
+            <div className={styles.confirmation__detailsPlaceholder}>
               <p>Move details summary will be shown here...</p>
             </div>
           </div>

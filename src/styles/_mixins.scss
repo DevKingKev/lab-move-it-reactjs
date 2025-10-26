@@ -41,7 +41,6 @@
   color: $text-color;
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -62,7 +61,6 @@
 // Card mixin
 @mixin card {
   background: #fff;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 16px;
 }

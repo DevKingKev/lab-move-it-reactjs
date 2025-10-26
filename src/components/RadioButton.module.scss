@@ -32,8 +32,7 @@
     gap: $spacing-sm;
     padding: $spacing-sm $spacing-lg;
     border-radius: $border-radius-sm;
-    background-color: $moveit-white;
-    cursor: pointer;
+     cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
 
@@ -42,8 +41,7 @@
     }
 
     &--selected {
-      background-color: $moveit-header-blue;
-
+ 
       .radioButton__circle {
         border-color: $moveit-white;
         background-color: $moveit-white;
@@ -53,10 +51,6 @@
           transform: scale(1);
           background-color: $moveit-header-blue;
         }
-      }
-
-      .radioButton__text {
-        color: $moveit-white;
       }
     }
   }

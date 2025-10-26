@@ -57,10 +57,10 @@ const RadioButton = ({
               }}
               className={styles.radioButton__input}
             />
-            <span className={styles.radioButton__circle} />
             <span className={styles.radioButton__text}>
               {option.label.toUpperCase()}
             </span>
+            <span className={styles.radioButton__circle} />
           </label>
         ))}
       </div>

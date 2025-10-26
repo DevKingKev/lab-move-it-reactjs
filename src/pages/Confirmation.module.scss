@@ -22,34 +22,30 @@
     gap: $spacing-xl;
   }
 
-  &__price-section {
+  &__priceSection {
     background-color: $moveit-white;
     padding: $spacing-xl;
-    border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  &__price-placeholder {
+  &__pricePlaceholder {
     @include flex-center;
     padding: $spacing-xxl;
     background-color: $moveit-success-green;
     color: $moveit-white;
-    border-radius: 4px;
     font-size: $font-size-lg;
   }
 
-  &__details-section {
+  &__detailsSection {
     background-color: $moveit-white;
     padding: $spacing-xl;
-    border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  &__details-placeholder {
+  &__detailsPlaceholder {
     @include flex-center;
     padding: $spacing-xxl;
     background-color: $moveit-card-header-blue;
-    border-radius: 4px;
     color: $moveit-text-muted;
   }
 }

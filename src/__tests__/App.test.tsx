@@ -6,7 +6,7 @@ test("App should render Layout with header", () => {
   renderWithProviders(<App />)
 
   // The app should render the Move-It header
-  expect(screen.getByRole("heading", { name: /Move-It/i })).toBeInTheDocument()
+  expect(screen.getByRole("heading", { name: /Move.*It/i })).toBeInTheDocument()
 })
 
 test("App should render PreOffer page by default", () => {
