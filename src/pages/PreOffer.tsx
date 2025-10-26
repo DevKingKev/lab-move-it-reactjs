@@ -1,8 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../global/hooks"
-import {
-  updateField,
-  selectPreOfferState,
-} from "../store/slices/preOfferSlice"
+import { updateField, selectPreOfferState } from "../store/slices/preOfferSlice"
 import { Card, FormSection, InputField, Button } from "../components"
 import "./PreOffer.module.scss"
 
