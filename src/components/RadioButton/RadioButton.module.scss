@@ -1,0 +1,107 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.radioButton {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $spacing-md;
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $moveit-text-dark;
+    margin-bottom: $spacing-sm;
+    letter-spacing: 0.5px;
+  }
+
+  &__required {
+    color: $danger-color;
+    margin-left: 2px;
+  }
+
+  &__options {
+    display: flex;
+    gap: $spacing-md;
+  }
+
+  &__option {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-sm;
+    background-color: $moveit-white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &:hover {
+      background-color: rgba($moveit-header-blue, 0.05);
+    }
+
+    &--selected {
+      background-color: $moveit-header-blue;
+
+      .radioButton__circle {
+        border-color: $moveit-white;
+        background-color: $moveit-white;
+
+        &::after {
+          opacity: 1;
+          transform: scale(1);
+          background-color: $moveit-header-blue;
+        }
+      }
+
+      .radioButton__text {
+        color: $moveit-white;
+      }
+    }
+  }
+
+  &__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  &__circle {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    border: 2px solid $moveit-header-blue;
+    border-radius: 50%;
+    background-color: $moveit-white;
+    position: relative;
+    transition: all 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: $moveit-header-blue;
+      opacity: 0;
+      transition: all 0.2s ease;
+    }
+  }
+
+  &__text {
+    flex: 0 0 auto;
+    font-size: $font-size-md;
+    font-weight: $font-weight-medium;
+    color: $moveit-text-dark;
+    letter-spacing: 0.5px;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: color 0.2s ease;
+  }
+}

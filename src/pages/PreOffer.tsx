@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../global/hooks"
 import { updateField, selectPreOfferState } from "../store/slices/preOfferSlice"
-import { Card, FormSection, InputField, Button } from "../components"
+import { Card, FormSection, InputField, Button, RadioButton } from "../components"
 import "./PreOffer.module.scss"
 
 const PreOffer = () => {
@@ -125,35 +125,18 @@ const PreOffer = () => {
                 type="number"
                 min={0}
               />
-              <div className="pre-offer__checkbox-field">
-                <label className="pre-offer__checkbox-label">
-                  Is packing assistance needed?
-                </label>
-                <div className="pre-offer__radio-group">
-                  <label className="pre-offer__radio-option">
-                    <input
-                      type="radio"
-                      name="packingAssistance"
-                      checked={formData.packingAssistanceNeeded}
-                      onChange={() => {
-                        handleFieldChange("packingAssistanceNeeded", true)
-                      }}
-                    />
-                    <span>Yes</span>
-                  </label>
-                  <label className="pre-offer__radio-option">
-                    <input
-                      type="radio"
-                      name="packingAssistance"
-                      checked={!formData.packingAssistanceNeeded}
-                      onChange={() => {
-                        handleFieldChange("packingAssistanceNeeded", false)
-                      }}
-                    />
-                    <span>No</span>
-                  </label>
-                </div>
-              </div>
+              <RadioButton
+                label="Is packing assistance needed?"
+                value={formData.packingAssistanceNeeded}
+                options={[
+                  { value: true, label: "Yes" },
+                  { value: false, label: "No" },
+                ]}
+                onChange={value => {
+                  handleFieldChange("packingAssistanceNeeded", value)
+                }}
+                name="packingAssistance"
+              />
             </FormSection>
           </Card>
 

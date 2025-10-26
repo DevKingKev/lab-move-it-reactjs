@@ -4,6 +4,7 @@ import Card from "../Card/Card"
 import InputField from "../InputField/InputField"
 import Button from "../Button/Button"
 import FormSection from "../FormSection/FormSection"
+import RadioButton from "../RadioButton/RadioButton"
 
 describe("Component Integration", () => {
   test("Card renders with step and header", () => {
@@ -62,5 +63,25 @@ describe("Component Integration", () => {
 
     expect(screen.getByText("FIELD 1")).toBeInTheDocument()
     expect(screen.getByText("FIELD 2")).toBeInTheDocument()
+  })
+
+  test("RadioButton renders with options", () => {
+    const handleChange = vi.fn()
+    renderWithProviders(
+      <RadioButton
+        label="Test Radio"
+        value="yes"
+        options={[
+          { value: "yes", label: "Yes" },
+          { value: "no", label: "No" },
+        ]}
+        onChange={handleChange}
+        name="testRadio"
+      />,
+    )
+
+    expect(screen.getByText("TEST RADIO")).toBeInTheDocument()
+    expect(screen.getByText("YES")).toBeInTheDocument()
+    expect(screen.getByText("NO")).toBeInTheDocument()
   })
 })

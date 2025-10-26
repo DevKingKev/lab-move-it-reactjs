@@ -21,51 +21,6 @@
     gap: $spacing-lg;
   }
 
-  &__checkbox-field {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-sm;
-  }
-
-  &__checkbox-label {
-    font-size: $font-size-sm;
-    font-weight: $font-weight-bold;
-    color: $moveit-text-dark;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  &__radio-group {
-    display: flex;
-    gap: $spacing-lg;
-  }
-
-  &__radio-option {
-    display: flex;
-    align-items: center;
-    gap: $spacing-sm;
-    cursor: pointer;
-    font-size: $font-size-md;
-    color: $moveit-text-dark;
-
-    input[type="radio"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      accent-color: $moveit-header-blue;
-    }
-
-    span {
-      -webkit-user-select: none;
-      user-select: none;
-    }
-
-    &:hover {
-      color: $moveit-header-blue;
-    }
-  }
-
   &__button-container {
     flex: 0 0 auto;
     display: flex;
