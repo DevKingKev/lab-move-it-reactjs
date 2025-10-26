@@ -15,4 +15,3 @@ test("App should render PreOffer page by default", () => {
   // The PreOffer page should be rendered by default
   expect(screen.getByText(/Get Your Moving Quote/i)).toBeInTheDocument()
 })
-
