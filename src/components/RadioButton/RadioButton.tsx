@@ -42,7 +42,9 @@ const RadioButton = ({
           <label
             key={String(option.value)}
             className={`${styles.radioButton__option} ${
-              value === option.value ? styles["radioButton__option--selected"] : ""
+              value === option.value
+                ? styles["radioButton__option--selected"]
+                : ""
             }`}
           >
             <input

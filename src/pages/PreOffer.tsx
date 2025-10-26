@@ -1,6 +1,12 @@
 import { useAppDispatch, useAppSelector } from "../global/hooks"
 import { updateField, selectPreOfferState } from "../store/slices/preOfferSlice"
-import { Card, FormSection, InputField, Button, RadioButton } from "../components"
+import {
+  Card,
+  FormSection,
+  InputField,
+  Button,
+  RadioButton,
+} from "../components"
 import "./PreOffer.module.scss"
 
 const PreOffer = () => {
