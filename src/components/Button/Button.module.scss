@@ -1,0 +1,61 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.button {
+  flex: 0 0 auto;
+  padding: $spacing-md $spacing-xl;
+  border: none;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+  font-family: $font-family-base;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+
+  &--primary {
+    background-color: $moveit-header-blue;
+    color: $moveit-white;
+
+    &:hover:not(:disabled) {
+      background-color: darken($moveit-header-blue, 10%);
+      box-shadow: $shadow-md;
+    }
+
+    &:active:not(:disabled) {
+      background-color: darken($moveit-header-blue, 15%);
+      transform: translateY(1px);
+    }
+  }
+
+  &--secondary {
+    background-color: transparent;
+    color: $moveit-header-blue;
+    border: 2px solid $moveit-header-blue;
+
+    &:hover:not(:disabled) {
+      background-color: rgba($moveit-header-blue, 0.1);
+    }
+
+    &:active:not(:disabled) {
+      background-color: rgba($moveit-header-blue, 0.2);
+      transform: translateY(1px);
+    }
+  }
+
+  &--fullWidth {
+    width: 100%;
+  }
+
+  &:disabled {
+    background-color: $moveit-placeholder-grey;
+    color: $moveit-text-muted;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($moveit-header-blue, 0.3);
+  }
+}

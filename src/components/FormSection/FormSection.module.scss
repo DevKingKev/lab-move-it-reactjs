@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.formSection {
+  flex: 0 0 auto;
+  width: 100%;
+
+  &--grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-md $spacing-lg;
+
+    // Stack on mobile
+    @media (max-width: $breakpoint-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--stack {
+    @include flex-column;
+    gap: $spacing-md;
+  }
+}

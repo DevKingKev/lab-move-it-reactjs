@@ -13,5 +13,5 @@ test("App should render PreOffer page by default", () => {
   renderWithProviders(<App />)
 
   // The PreOffer page should be rendered by default
-  expect(screen.getByText(/Get Your Moving Quote/i)).toBeInTheDocument()
+  expect(screen.getByText(/Pre-offer for home moving/i)).toBeInTheDocument()
 })

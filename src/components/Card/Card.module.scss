@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.card {
+  flex: 0 0 auto;
+  background-color: $moveit-white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-md;
+  overflow: hidden;
+  margin-bottom: $spacing-lg;
+
+  &__header {
+    background-color: $moveit-card-header-blue;
+    padding: $spacing-md $spacing-lg;
+    position: relative;
+  }
+
+  &__step {
+    position: absolute;
+    left: $spacing-md;
+    top: $spacing-md;
+    width: 40px;
+    height: 40px;
+    background-color: $moveit-header-blue;
+    color: $moveit-white;
+    @include flex-center;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    border-radius: 4px;
+  }
+
+  &__title {
+    margin: 0;
+    padding-left: 56px; // Space for step number
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $moveit-text-dark;
+  }
+
+  // When no step, remove padding from title
+  &__header:not(:has(.card__step)) &__title {
+    padding-left: 0;
+  }
+
+  &__content {
+    flex: 0 0 auto;
+    padding: $spacing-lg;
+    background-color: $moveit-form-blue;
+  }
+}

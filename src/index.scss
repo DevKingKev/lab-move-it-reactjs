@@ -11,3 +11,9 @@ code {
   font-family:
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+// Default flex-based layout
+// This mimics block layout but gives us flexibility options
+div {
+  flex: 0 0 auto;
+}

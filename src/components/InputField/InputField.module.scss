@@ -1,0 +1,62 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.inputField {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $spacing-md;
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $moveit-text-dark;
+    margin-bottom: $spacing-xs;
+    letter-spacing: 0.5px;
+  }
+
+  &__required {
+    color: $danger-color;
+    margin-left: 2px;
+  }
+
+  &__input {
+    flex: 0 0 auto;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid lighten($moveit-placeholder-grey, 5%);
+    border-radius: $border-radius-sm;
+    font-size: $font-size-md;
+    font-family: $font-family-base;
+    background-color: $moveit-white;
+    color: $moveit-text-dark;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::placeholder {
+      color: $moveit-text-muted;
+      text-transform: capitalize;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $moveit-header-blue;
+      box-shadow: 0 0 0 3px rgba($moveit-header-blue, 0.1);
+    }
+
+    &:disabled {
+      background-color: lighten($moveit-placeholder-grey, 10%);
+      cursor: not-allowed;
+    }
+
+    // Remove spinner arrows for number inputs
+    &[type="number"] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+      
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+}
