@@ -15,6 +15,24 @@ export type PreOfferState = {
     extraAreaInM2: number | null;
     numbersOfPianos: number | null;
     packingAssistanceNeeded: boolean;
+    // Cached estimated price from API
+    estimatedPrice: {
+        value: number;
+        currency: string;
+    } | null;
+    // Last submitted form data (for cache comparison)
+    lastSubmittedData: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        phoneNumber: string;
+        addressFrom: string;
+        addressTo: string;
+        livingAreaInM2: number;
+        extraAreaInM2: number;
+        numbersOfPianos: number;
+        packingAssistanceNeeded: boolean;
+    } | null;
 };
 
 const initialState: PreOfferState = {
@@ -28,6 +46,8 @@ const initialState: PreOfferState = {
     extraAreaInM2: null,
     numbersOfPianos: null,
     packingAssistanceNeeded: false,
+    estimatedPrice: null,
+    lastSubmittedData: null,
 };
 
 export const preOfferSlice = createAppSlice( {
@@ -116,6 +136,44 @@ export const preOfferSlice = createAppSlice( {
                 state.packingAssistanceNeeded = action.payload.packingAssistanceNeeded;
             },
         ),
+
+        /**
+         * Store the calculated price and submitted data
+         */
+        setEstimatedPrice: create.reducer(
+            (
+                state,
+                action: PayloadAction<{
+                    estimatedPrice: {
+                        value: number;
+                        currency: string;
+                    };
+                    submittedData: {
+                        firstName: string;
+                        lastName: string;
+                        email: string;
+                        phoneNumber: string;
+                        addressFrom: string;
+                        addressTo: string;
+                        livingAreaInM2: number;
+                        extraAreaInM2: number;
+                        numbersOfPianos: number;
+                        packingAssistanceNeeded: boolean;
+                    };
+                }>,
+            ) => {
+                state.estimatedPrice = action.payload.estimatedPrice;
+                state.lastSubmittedData = action.payload.submittedData;
+            },
+        ),
+
+        /**
+         * Clear the cached price (e.g., when form changes)
+         */
+        clearEstimatedPrice: create.reducer( ( state ) => {
+            state.estimatedPrice = null;
+            state.lastSubmittedData = null;
+        } ),
     } ),
     selectors: {
         /**
@@ -175,6 +233,39 @@ export const preOfferSlice = createAppSlice( {
                 state.livingAreaInM2 > 0
             );
         },
+
+        /**
+         * Select the estimated price
+         */
+        selectEstimatedPrice: state => state.estimatedPrice,
+
+        /**
+         * Select the last submitted data
+         */
+        selectLastSubmittedData: state => state.lastSubmittedData,
+
+        /**
+         * Check if current form data matches last submitted data
+         */
+        selectIsFormDataUnchanged: state => {
+            if ( !state.lastSubmittedData ) {
+                return false;
+            }
+
+            const last = state.lastSubmittedData;
+            return (
+                state.firstName === last.firstName &&
+                state.lastName === last.lastName &&
+                state.email === last.email &&
+                state.phoneNumber === last.phoneNumber &&
+                state.addressFrom === last.addressFrom &&
+                state.addressTo === last.addressTo &&
+                ( state.livingAreaInM2 ?? 0 ) === last.livingAreaInM2 &&
+                ( state.extraAreaInM2 ?? 0 ) === last.extraAreaInM2 &&
+                ( state.numbersOfPianos ?? 0 ) === last.numbersOfPianos &&
+                state.packingAssistanceNeeded === last.packingAssistanceNeeded
+            );
+        },
     },
 } );
 
@@ -186,6 +277,8 @@ export const {
     setContactInfo,
     setAddresses,
     setMovingDetails,
+    setEstimatedPrice,
+    clearEstimatedPrice,
 } = preOfferSlice.actions;
 
 // Export selectors
@@ -196,4 +289,7 @@ export const {
     selectMovingDetails,
     selectRateParams,
     selectIsFormValid,
+    selectEstimatedPrice,
+    selectLastSubmittedData,
+    selectIsFormDataUnchanged,
 } = preOfferSlice.selectors;

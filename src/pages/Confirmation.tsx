@@ -1,41 +1,28 @@
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { useAppSelector } from "../global/hooks"
+import {
+  selectEstimatedPrice,
+  selectLastSubmittedData,
+} from "../store/slices/preOfferSlice"
 import { Card, FormSection, ValueField, Button } from "../components"
 import styles from "./Confirmation.module.scss"
 
-type LocationState = {
-  formData: {
-    firstName: string
-    lastName: string
-    email: string
-    phoneNumber: string
-    addressFrom: string
-    addressTo: string
-    livingAreaInM2: number
-    extraAreaInM2: number
-    numbersOfPianos: number
-    packingAssistanceNeeded: boolean
-  }
-  estimatedPrice?: {
-    value: number
-    currency: string
-  }
-}
-
 const Confirmation = () => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const state = location.state as LocationState | null
+  const estimatedPrice = useAppSelector(selectEstimatedPrice)
+  const lastSubmittedData = useAppSelector(selectLastSubmittedData)
 
-  // If no state, redirect to pre-offer
-  if (!state?.formData) {
+  // If no estimated price or last submitted data, redirect to pre-offer
+  if (!estimatedPrice || !lastSubmittedData) {
     void navigate("/")
     return null
   }
 
-  const { formData, estimatedPrice } = state
+  // Use the last submitted data for display
+  const formData = lastSubmittedData
 
   const handleEditDetails = () => {
-    void navigate("/", { state: { formData } })
+    void navigate("/")
   }
 
   const handleConfirmSubmit = () => {
@@ -51,17 +38,15 @@ const Confirmation = () => {
           <h2 className={styles.confirmation__title}>Offer calculated!</h2>
         </div>
 
-        {estimatedPrice && (
-          <div className={styles.confirmation__price}>
-            <p className={styles.confirmation__priceLabel}>
-              Your estimated price is:
-            </p>
-            <p className={styles.confirmation__priceValue}>
-              ${estimatedPrice.value} {estimatedPrice.currency}
-            </p>
-            <p className={styles.confirmation__priceTax}>incl. taxes</p>
-          </div>
-        )}
+        <div className={styles.confirmation__price}>
+          <p className={styles.confirmation__priceLabel}>
+            Your estimated price is:
+          </p>
+          <p className={styles.confirmation__priceValue}>
+            ${estimatedPrice.value} {estimatedPrice.currency}
+          </p>
+          <p className={styles.confirmation__priceTax}>incl. taxes</p>
+        </div>
 
         <div className={styles.confirmation__details}>
           <p className={styles.confirmation__detailsHeader}>

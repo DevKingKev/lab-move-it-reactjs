@@ -1,7 +1,13 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../global/hooks"
-import { updateField, selectPreOfferState } from "../store/slices/preOfferSlice"
+import {
+  updateField,
+  selectPreOfferState,
+  selectEstimatedPrice,
+  selectIsFormDataUnchanged,
+  setEstimatedPrice,
+} from "../store/slices/preOfferSlice"
 import { useLazyGetRateQuery } from "../services/rateAPI"
 import {
   Card,
@@ -9,6 +15,7 @@ import {
   InputField,
   Button,
   RadioButton,
+  Spinner,
 } from "../components"
 import styles from "./PreOffer.module.scss"
 
@@ -16,6 +23,8 @@ const PreOffer = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const formData = useAppSelector(selectPreOfferState)
+  const estimatedPrice = useAppSelector(selectEstimatedPrice)
+  const isFormDataUnchanged = useAppSelector(selectIsFormDataUnchanged)
   const [getRateQuery, { isLoading: isLoadingRate }] = useLazyGetRateQuery()
   const [error, setError] = useState<string | null>(null)
 
@@ -38,6 +47,13 @@ const PreOffer = () => {
       numbersOfPianos: formData.numbersOfPianos ?? 0,
     }
 
+    // Check if we have a cached calculation with identical data
+    if (isFormDataUnchanged && estimatedPrice) {
+      // Reuse cached price without API call
+      void navigate("/confirmation")
+      return
+    }
+
     // Calculate distance (mock calculation for now - from "addressFrom" to "addressTo")
     // In a real app, this would use a geocoding API
     const distanceInKm = 50 // Default distance
@@ -51,13 +67,16 @@ const PreOffer = () => {
     })
       .unwrap()
       .then(result => {
-        // Navigate to confirmation with form data and price
-        void navigate("/confirmation", {
-          state: {
-            formData: submissionData,
+        // Store the calculation in Redux for future comparison
+        dispatch(
+          setEstimatedPrice({
             estimatedPrice: result,
-          },
-        })
+            submittedData: submissionData,
+          }),
+        )
+
+        // Navigate to confirmation
+        void navigate("/confirmation")
       })
       .catch((err: unknown) => {
         console.error("Failed to get rate:", err)
@@ -194,6 +213,15 @@ const PreOffer = () => {
           </div>
         </form>
       </div>
+
+      {/* Loading Overlay */}
+      {isLoadingRate && (
+        <Spinner
+          size="large"
+          fullPage={true}
+          loadingText="Calculating your offer..."
+        />
+      )}
     </div>
   )
 }

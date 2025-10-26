@@ -5,3 +5,4 @@ export { default as Button } from "./Button";
 export { default as FormSection } from "./FormSection";
 export { default as RadioButton } from "./RadioButton";
 export { default as ValueField } from "./ValueField";
+export { default as Spinner } from "./Spinner";

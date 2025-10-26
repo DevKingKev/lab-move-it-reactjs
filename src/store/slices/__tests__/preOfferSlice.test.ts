@@ -9,12 +9,17 @@ import {
     setContactInfo,
     setAddresses,
     setMovingDetails,
+    setEstimatedPrice,
+    clearEstimatedPrice,
     selectPreOfferState,
     selectContactInfo,
     selectAddresses,
     selectMovingDetails,
     selectRateParams,
     selectIsFormValid,
+    selectEstimatedPrice,
+    selectLastSubmittedData,
+    selectIsFormDataUnchanged,
 } from "../preOfferSlice";
 
 type LocalTestContext = {
@@ -34,6 +39,8 @@ describe( "preOffer reducer", () => {
             extraAreaInM2: 20,
             numbersOfPianos: 1,
             packingAssistanceNeeded: true,
+            estimatedPrice: null,
+            lastSubmittedData: null,
         };
 
         const store = makeStore( { preOffer: initialState } );
@@ -53,6 +60,8 @@ describe( "preOffer reducer", () => {
             extraAreaInM2: null,
             numbersOfPianos: null,
             packingAssistanceNeeded: false,
+            estimatedPrice: null,
+            lastSubmittedData: null,
         } );
     } );
 
@@ -94,6 +103,8 @@ describe( "preOffer reducer", () => {
             extraAreaInM2: null,
             numbersOfPianos: null,
             packingAssistanceNeeded: false,
+            estimatedPrice: null,
+            lastSubmittedData: null,
         } );
     } );
 
@@ -188,5 +199,83 @@ describe( "preOffer reducer", () => {
             } ),
         );
         expect( selectIsFormValid( store.getState() ) ).toBe( true );
+    } );
+
+    it<LocalTestContext>( "should handle setEstimatedPrice", ( { store } ) => {
+        const estimatedPrice = { value: 1000, currency: "USD" };
+        const submittedData = {
+            firstName: "John",
+            lastName: "Doe",
+            email: "john.doe@example.com",
+            phoneNumber: "+46701234567",
+            addressFrom: "Stockholm, Sweden",
+            addressTo: "Gothenburg, Sweden",
+            livingAreaInM2: 80,
+            extraAreaInM2: 20,
+            numbersOfPianos: 1,
+            packingAssistanceNeeded: true,
+        };
+
+        store.dispatch( setEstimatedPrice( { estimatedPrice, submittedData } ) );
+
+        expect( selectEstimatedPrice( store.getState() ) ).toStrictEqual( estimatedPrice );
+        expect( selectLastSubmittedData( store.getState() ) ).toStrictEqual( submittedData );
+    } );
+
+    it<LocalTestContext>( "should handle clearEstimatedPrice", ( { store } ) => {
+        // First set a price
+        store.dispatch(
+            setEstimatedPrice( {
+                estimatedPrice: { value: 1000, currency: "USD" },
+                submittedData: {
+                    firstName: "John",
+                    lastName: "Doe",
+                    email: "john.doe@example.com",
+                    phoneNumber: "+46701234567",
+                    addressFrom: "Stockholm, Sweden",
+                    addressTo: "Gothenburg, Sweden",
+                    livingAreaInM2: 80,
+                    extraAreaInM2: 20,
+                    numbersOfPianos: 1,
+                    packingAssistanceNeeded: true,
+                },
+            } ),
+        );
+
+        // Then clear it
+        store.dispatch( clearEstimatedPrice() );
+
+        expect( selectEstimatedPrice( store.getState() ) ).toBeNull();
+        expect( selectLastSubmittedData( store.getState() ) ).toBeNull();
+    } );
+
+    it<LocalTestContext>( "should detect unchanged form data", ( { store } ) => {
+        // Set estimated price with submitted data
+        store.dispatch(
+            setEstimatedPrice( {
+                estimatedPrice: { value: 1000, currency: "USD" },
+                submittedData: {
+                    firstName: "John",
+                    lastName: "Doe",
+                    email: "john.doe@example.com",
+                    phoneNumber: "+46701234567",
+                    addressFrom: "Stockholm, Sweden",
+                    addressTo: "Gothenburg, Sweden",
+                    livingAreaInM2: 80,
+                    extraAreaInM2: 20,
+                    numbersOfPianos: 1,
+                    packingAssistanceNeeded: true,
+                },
+            } ),
+        );
+
+        // Data should be unchanged (matches initial state)
+        expect( selectIsFormDataUnchanged( store.getState() ) ).toBe( true );
+
+        // Change a field
+        store.dispatch( updateField( { field: "firstName", value: "Jane" } ) );
+
+        // Data should now be changed
+        expect( selectIsFormDataUnchanged( store.getState() ) ).toBe( false );
     } );
 } );

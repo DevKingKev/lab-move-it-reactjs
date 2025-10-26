@@ -1,0 +1,113 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.spinner {
+  display: inline-block;
+  position: relative;
+
+  &--small {
+    width: 24px;
+    height: 24px;
+  }
+
+  &--medium {
+    width: 40px;
+    height: 40px;
+  }
+
+  &--large {
+    width: 80px;
+    height: 80px;
+  }
+
+  // Common styles for all circles
+  &__outer,
+  &__middle,
+  &__inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-color: transparent;
+    background: transparent;
+    border-radius: 50%;
+  }
+
+  // Outer circle - largest, rotates clockwise
+  &__outer {
+    width: 100%;
+    height: 100%;
+    border-width: 2px;
+    border-top-color: $moveit-header-blue;
+    border-right-color: $moveit-header-blue;
+    animation: spinClockwise 1.5s linear infinite;
+  }
+
+  // Middle circle - medium, rotates counter-clockwise
+  &__middle {
+    width: 70%;
+    height: 70%;
+    border-width: 2px;
+    border-bottom-color: $moveit-success-green;
+    border-left-color: $moveit-success-green;
+    animation: spinCounterClockwise 1.2s linear infinite;
+  }
+
+  // Inner circle - smallest, rotates clockwise
+  &__inner {
+    width: 40%;
+    height: 40%;
+    border-width: 2px;
+    border-top-color: $moveit-header-blue;
+    border-right-color: $moveit-header-blue;
+    animation: spinClockwise 0.9s linear infinite;
+  }
+
+  // Larger spinner needs thicker borders
+  &--large &__outer,
+  &--large &__middle,
+  &--large &__inner {
+    border-width: 3px;
+  }
+
+  // Full page overlay
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  &__overlayContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__loadingText {
+    font-size: 18px;
+    font-weight: $font-weight-medium;
+    color: $moveit-header-blue;
+    margin: 0;
+  }
+}
+
+@keyframes spinClockwise {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes spinCounterClockwise {
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
