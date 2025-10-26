@@ -58,7 +58,7 @@ const PreOffer = () => {
     // Calculate distance between addresses
     const distanceInKm = calculateDistanceFromAddresses(
       formData.addressFrom,
-      formData.addressTo
+      formData.addressTo,
     )
 
     // Prepare API parameters

@@ -25,7 +25,7 @@ const Confirmation = () => {
   // Calculate distance for display
   const distanceInKm = calculateDistanceFromAddresses(
     formData.addressFrom,
-    formData.addressTo
+    formData.addressTo,
   )
 
   const handleEditDetails = () => {
