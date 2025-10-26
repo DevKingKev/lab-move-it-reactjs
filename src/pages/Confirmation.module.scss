@@ -1,0 +1,55 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.confirmation {
+  width: 100%;
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: $font-size-xxl;
+    color: $moveit-text-dark;
+    margin-bottom: $spacing-xl;
+    text-align: center;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+
+  &__price-section {
+    background-color: $moveit-white;
+    padding: $spacing-xl;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__price-placeholder {
+    @include flex-center;
+    padding: $spacing-xxl;
+    background-color: $moveit-success-green;
+    color: $moveit-white;
+    border-radius: 4px;
+    font-size: $font-size-lg;
+  }
+
+  &__details-section {
+    background-color: $moveit-white;
+    padding: $spacing-xl;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__details-placeholder {
+    @include flex-center;
+    padding: $spacing-xxl;
+    background-color: $moveit-card-header-blue;
+    border-radius: 4px;
+    color: $moveit-text-muted;
+  }
+}

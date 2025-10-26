@@ -1,2 +1,1 @@
-export { Counter } from "./Counter";
-export { Quotes } from "./Quotes";
+export { default as Layout } from "./Layout";

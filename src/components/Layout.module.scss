@@ -1,0 +1,48 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    background-color: $moveit-header-blue;
+    color: $moveit-white;
+    padding: $spacing-md $spacing-lg;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+  }
+
+  &__main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: $spacing-lg;
+  }
+
+  &__footer {
+    background-color: $moveit-card-header-blue;
+    padding: $spacing-md $spacing-lg;
+    margin-top: auto;
+  }
+
+  &__footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: $moveit-text-muted;
+    font-size: $font-size-sm;
+  }
+}

@@ -1,0 +1,40 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.pre-offer {
+  width: 100%;
+
+  &__container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: $font-size-xxl;
+    color: $moveit-text-dark;
+    margin-bottom: $spacing-md;
+    text-align: center;
+  }
+
+  &__description {
+    font-size: $font-size-md;
+    color: $moveit-text-muted;
+    text-align: center;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__form {
+    background-color: $moveit-white;
+    padding: $spacing-xl;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__form-placeholder {
+    @include flex-center;
+    padding: $spacing-xxl;
+    background-color: $moveit-form-blue;
+    border-radius: 4px;
+    color: $moveit-text-muted;
+  }
+}
