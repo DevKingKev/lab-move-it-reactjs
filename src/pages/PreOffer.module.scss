@@ -23,7 +23,15 @@
   &__buttonContainer {
     flex: 0 0 auto;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: $spacing-sm;
     margin-top: $spacing-md;
+  }
+
+  &__error {
+    color: #d32f2f;
+    margin: 0;
+    text-align: center;
+    font-size: $font-size-sm;
   }
 }

@@ -1,0 +1,37 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.valueField {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  padding: 40px;
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $moveit-text-dark;
+    margin-bottom: $spacing-xs;
+    letter-spacing: 0.5px;
+  }
+
+  &__value {
+    font-size: $font-size-md;
+    color: $moveit-text-dark;
+    padding: $spacing-sm 0;
+  }
+
+  &__email {
+    font-size: $font-size-md;
+    color: $moveit-text-dark;
+    text-decoration: underline;
+    padding: $spacing-sm 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $moveit-header-blue;
+    }
+  }
+}

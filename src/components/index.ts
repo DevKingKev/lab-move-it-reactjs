@@ -4,3 +4,4 @@ export { default as InputField } from "./InputField";
 export { default as Button } from "./Button";
 export { default as FormSection } from "./FormSection";
 export { default as RadioButton } from "./RadioButton";
+export { default as ValueField } from "./ValueField";

@@ -11,9 +11,9 @@ export type PreOfferState = {
     phoneNumber: string;
     addressFrom: string;
     addressTo: string;
-    livingAreaInM2: number;
-    extraAreaInM2: number;
-    numbersOfPianos: number;
+    livingAreaInM2: number | null;
+    extraAreaInM2: number | null;
+    numbersOfPianos: number | null;
     packingAssistanceNeeded: boolean;
 };
 
@@ -24,9 +24,9 @@ const initialState: PreOfferState = {
     phoneNumber: "",
     addressFrom: "",
     addressTo: "",
-    livingAreaInM2: 0,
-    extraAreaInM2: 0,
-    numbersOfPianos: 0,
+    livingAreaInM2: null,
+    extraAreaInM2: null,
+    numbersOfPianos: null,
     packingAssistanceNeeded: false,
 };
 
@@ -171,6 +171,7 @@ export const preOfferSlice = createAppSlice( {
                 state.phoneNumber.trim() !== "" &&
                 state.addressFrom.trim() !== "" &&
                 state.addressTo.trim() !== "" &&
+                state.livingAreaInM2 !== null &&
                 state.livingAreaInM2 > 0
             );
         },

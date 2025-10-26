@@ -1,13 +1,18 @@
-import type { ChangeEvent, HTMLInputTypeAttribute } from "react"
+import {
+  useState,
+  useEffect,
+  type ChangeEvent,
+  type HTMLInputTypeAttribute,
+} from "react"
 import styles from "./InputField.module.scss"
 
 type InputFieldProps = {
   /** Field label (will be capitalized) */
   label: string
   /** Input value */
-  value: string | number
+  value: string | number | null
   /** Change handler */
-  onChange: (value: string | number) => void
+  onChange: (value: string | number | null) => void
   /** Input type (text, email, tel, number, etc.) */
   type?: HTMLInputTypeAttribute
   /** Optional placeholder text */
@@ -22,6 +27,8 @@ type InputFieldProps = {
   max?: number
   /** Optional step for number inputs */
   step?: number
+  /** Optional debounce delay in ms (default: 500) */
+  debounceDelay?: number
 }
 
 const InputField = ({
@@ -35,10 +42,35 @@ const InputField = ({
   min,
   max,
   step,
+  debounceDelay = 500,
 }: InputFieldProps) => {
+  const [localValue, setLocalValue] = useState<string | number | null>(value)
+
+  // Update local value when prop value changes
+  useEffect(() => {
+    setLocalValue(value)
+  }, [value])
+
+  // Debounce the onChange callback
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (localValue !== value) {
+        onChange(localValue)
+      }
+    }, debounceDelay)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [localValue, debounceDelay, onChange, value])
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = type === "number" ? Number(e.target.value) : e.target.value
-    onChange(newValue)
+    if (type === "number") {
+      const newValue = e.target.value === "" ? null : Number(e.target.value)
+      setLocalValue(newValue)
+    } else {
+      setLocalValue(e.target.value)
+    }
   }
 
   return (
@@ -49,7 +81,7 @@ const InputField = ({
       </label>
       <input
         type={type}
-        value={value}
+        value={localValue ?? ""}
         onChange={handleChange}
         placeholder={placeholder}
         required={required}

@@ -1,5 +1,8 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../global/hooks"
 import { updateField, selectPreOfferState } from "../store/slices/preOfferSlice"
+import { useLazyGetRateQuery } from "../services/rateAPI"
 import {
   Card,
   FormSection,
@@ -11,19 +14,55 @@ import styles from "./PreOffer.module.scss"
 
 const PreOffer = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const formData = useAppSelector(selectPreOfferState)
+  const [getRateQuery, { isLoading: isLoadingRate }] = useLazyGetRateQuery()
+  const [error, setError] = useState<string | null>(null)
 
   const handleFieldChange = (
     field: keyof typeof formData,
-    value: string | number | boolean,
+    value: string | number | boolean | null,
   ) => {
     dispatch(updateField({ field, value }))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Implement rate API call and navigation to confirmation
-    console.log("Form submitted:", formData)
+    setError(null)
+
+    // Convert null values to 0 before submitting
+    const submissionData = {
+      ...formData,
+      livingAreaInM2: formData.livingAreaInM2 ?? 0,
+      extraAreaInM2: formData.extraAreaInM2 ?? 0,
+      numbersOfPianos: formData.numbersOfPianos ?? 0,
+    }
+
+    // Calculate distance (mock calculation for now - from "addressFrom" to "addressTo")
+    // In a real app, this would use a geocoding API
+    const distanceInKm = 50 // Default distance
+
+    // Call the rate API
+    void getRateQuery({
+      livingAreaInM2: submissionData.livingAreaInM2,
+      extraAreaInM2: submissionData.extraAreaInM2,
+      numbersOfPianos: submissionData.numbersOfPianos,
+      distanceInKm,
+    })
+      .unwrap()
+      .then(result => {
+        // Navigate to confirmation with form data and price
+        void navigate("/confirmation", {
+          state: {
+            formData: submissionData,
+            estimatedPrice: result,
+          },
+        })
+      })
+      .catch((err: unknown) => {
+        console.error("Failed to get rate:", err)
+        setError("Failed to calculate rate. Please try again.")
+      })
   }
 
   return (
@@ -148,8 +187,9 @@ const PreOffer = () => {
 
           {/* Submit Button */}
           <div className={styles.preOffer__buttonContainer}>
-            <Button type="submit" fullWidth>
-              Request an offer
+            {error && <p className={styles.preOffer__error}>{error}</p>}
+            <Button type="submit" fullWidth disabled={isLoadingRate}>
+              {isLoadingRate ? "Calculating..." : "Request an offer"}
             </Button>
           </div>
         </form>

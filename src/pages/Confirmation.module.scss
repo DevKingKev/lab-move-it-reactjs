@@ -2,50 +2,93 @@
 @import '../styles/mixins';
 
 .confirmation {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   width: 100%;
 
   &__container {
-    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 1250px;
     margin: 0 auto;
+    width: 100%;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  &__successIcon {
+    width: 48px;
+    height: 48px;
+    background-color: $moveit-success-green;
+    color: $moveit-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    flex-shrink: 0;
   }
 
   &__title {
-    font-size: $font-size-xxl;
+    font-size: 32px;
+    font-weight: 700;
     color: $moveit-text-dark;
-    margin-bottom: $spacing-xl;
-    text-align: center;
+    margin: 0;
   }
 
-  &__content {
+  &__price {
+    background-color: $moveit-white;
+    padding: 32px;
     display: flex;
     flex-direction: column;
-    gap: $spacing-xl;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
   }
 
-  &__priceSection {
-    background-color: $moveit-white;
-    padding: $spacing-xl;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  &__priceLabel {
+    font-size: 18px;
+    color: $moveit-text-dark;
+    margin: 0;
   }
 
-  &__pricePlaceholder {
-    @include flex-center;
-    padding: $spacing-xxl;
-    background-color: $moveit-success-green;
-    color: $moveit-white;
-    font-size: $font-size-lg;
+  &__priceValue {
+    font-size: 48px;
+    font-weight: 700;
+    color: $moveit-header-blue;
+    margin: 0;
   }
 
-  &__detailsSection {
-    background-color: $moveit-white;
-    padding: $spacing-xl;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  &__detailsPlaceholder {
-    @include flex-center;
-    padding: $spacing-xxl;
-    background-color: $moveit-card-header-blue;
+  &__priceTax {
+    font-size: 14px;
     color: $moveit-text-muted;
+    margin: 0;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__detailsHeader {
+    font-size: 18px;
+    font-weight: 600;
+    color: $moveit-text-dark;
+    margin: 0 0 8px 0;
+  }
+
+  &__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
   }
 }

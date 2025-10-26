@@ -49,9 +49,9 @@ describe( "preOffer reducer", () => {
             phoneNumber: "",
             addressFrom: "",
             addressTo: "",
-            livingAreaInM2: 0,
-            extraAreaInM2: 0,
-            numbersOfPianos: 0,
+            livingAreaInM2: null,
+            extraAreaInM2: null,
+            numbersOfPianos: null,
             packingAssistanceNeeded: false,
         } );
     } );
@@ -90,9 +90,9 @@ describe( "preOffer reducer", () => {
             phoneNumber: "",
             addressFrom: "",
             addressTo: "",
-            livingAreaInM2: 0,
-            extraAreaInM2: 0,
-            numbersOfPianos: 0,
+            livingAreaInM2: null,
+            extraAreaInM2: null,
+            numbersOfPianos: null,
             packingAssistanceNeeded: false,
         } );
     } );

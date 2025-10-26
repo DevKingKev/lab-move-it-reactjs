@@ -7,8 +7,8 @@
 
   &--grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-md $spacing-lg;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+    gap: 0;
 
     // Stack on mobile
     @media (max-width: $breakpoint-sm) {
