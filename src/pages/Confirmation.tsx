@@ -4,6 +4,7 @@ import {
   selectEstimatedPrice,
   selectLastSubmittedData,
 } from "../store/slices/preOfferSlice"
+import { calculateDistanceFromAddresses } from "../utils/distanceUtils"
 import { Card, FormSection, ValueField, Button } from "../components"
 import styles from "./Confirmation.module.scss"
 
@@ -20,6 +21,12 @@ const Confirmation = () => {
 
   // Use the last submitted data for display
   const formData = lastSubmittedData
+
+  // Calculate distance for display
+  const distanceInKm = calculateDistanceFromAddresses(
+    formData.addressFrom,
+    formData.addressTo
+  )
 
   const handleEditDetails = () => {
     void navigate("/")
@@ -70,6 +77,10 @@ const Confirmation = () => {
             <FormSection layout="grid" mode="display">
               <ValueField label="From" value={formData.addressFrom} />
               <ValueField label="To" value={formData.addressTo} />
+              <ValueField
+                label="Distance"
+                value={`${distanceInKm.toFixed(2)} KM`}
+              />
             </FormSection>
           </Card>
 

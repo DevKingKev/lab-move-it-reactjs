@@ -9,6 +9,7 @@ import {
   setEstimatedPrice,
 } from "../store/slices/preOfferSlice"
 import { useLazyGetRateQuery } from "../services/rateAPI"
+import { calculateDistanceFromAddresses } from "../utils/distanceUtils"
 import {
   Card,
   FormSection,
@@ -54,17 +55,22 @@ const PreOffer = () => {
       return
     }
 
-    // Calculate distance (mock calculation for now - from "addressFrom" to "addressTo")
-    // In a real app, this would use a geocoding API
-    const distanceInKm = 50 // Default distance
+    // Calculate distance between addresses
+    const distanceInKm = calculateDistanceFromAddresses(
+      formData.addressFrom,
+      formData.addressTo
+    )
 
-    // Call the rate API
-    void getRateQuery({
+    // Prepare API parameters
+    const params = {
+      distanceInKm,
       livingAreaInM2: submissionData.livingAreaInM2,
       extraAreaInM2: submissionData.extraAreaInM2,
       numbersOfPianos: submissionData.numbersOfPianos,
-      distanceInKm,
-    })
+    }
+
+    // Call the rate API
+    void getRateQuery(params)
       .unwrap()
       .then(result => {
         // Store the calculation in Redux for future comparison
