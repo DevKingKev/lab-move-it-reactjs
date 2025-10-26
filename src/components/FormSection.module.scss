@@ -7,8 +7,8 @@
 
   &--grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
-    gap: 0;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-md $spacing-lg;
 
     // Stack on mobile
     @media (max-width: $breakpoint-sm) {
@@ -19,5 +19,11 @@
   &--stack {
     @include flex-column;
     gap: $spacing-md;
+  }
+
+  // Display mode (for Confirmation page with ValueFields)
+  &--display.formSection--grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+    gap: 0;
   }
 }

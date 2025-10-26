@@ -42,6 +42,12 @@
 
   &__content {
     flex: 0 0 auto;
+    padding: $spacing-lg;
+    background-color: $moveit-form-blue;
+  }
+
+  // Display mode (for Confirmation page with ValueFields)
+  &--display &__content {
     padding: 0;
     background-color: $moveit-white;
   }

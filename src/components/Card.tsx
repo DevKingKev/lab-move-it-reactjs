@@ -8,13 +8,23 @@ type CardProps = {
   header: string
   /** Card content */
   children: ReactNode
+  /** Mode: "input" for form fields (default), "display" for read-only values */
+  mode?: "input" | "display"
   /** Optional additional className */
   className?: string
 }
 
-const Card = ({ step, header, children, className }: CardProps) => {
+const Card = ({
+  step,
+  header,
+  children,
+  mode = "input",
+  className,
+}: CardProps) => {
+  const modeClass = mode === "display" ? styles["card--display"] : ""
+
   return (
-    <div className={`${styles.card} ${className ?? ""}`}>
+    <div className={`${styles.card} ${modeClass} ${className ?? ""}`}>
       <div className={styles.card__header}>
         {step && <div className={styles.card__step}>{step}</div>}
         <h3 className={styles.card__title}>{header}</h3>

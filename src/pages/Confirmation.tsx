@@ -69,8 +69,8 @@ const Confirmation = () => {
           </p>
 
           {/* Contact Details Card */}
-          <Card header="Contact details">
-            <FormSection layout="grid">
+          <Card header="Contact details" mode="display">
+            <FormSection layout="grid" mode="display">
               <ValueField
                 label="Name"
                 value={`${formData.firstName} ${formData.lastName}`}
@@ -81,16 +81,16 @@ const Confirmation = () => {
           </Card>
 
           {/* Address Details Card */}
-          <Card header="Address details">
-            <FormSection layout="grid">
+          <Card header="Address details" mode="display">
+            <FormSection layout="grid" mode="display">
               <ValueField label="From" value={formData.addressFrom} />
               <ValueField label="To" value={formData.addressTo} />
             </FormSection>
           </Card>
 
           {/* Moving Details Card */}
-          <Card header="Moving details">
-            <FormSection layout="grid">
+          <Card header="Moving details" mode="display">
+            <FormSection layout="grid" mode="display">
               <ValueField
                 label="Surface Area SQM"
                 value={`${String(formData.livingAreaInM2)} SQM`}
