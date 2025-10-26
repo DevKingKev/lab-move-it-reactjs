@@ -46,6 +46,16 @@
       cursor: not-allowed;
     }
 
+    // Error state - red border
+    &--error {
+      border-color: $danger-color;
+      
+      &:focus {
+        border-color: $danger-color;
+        box-shadow: 0 0 0 3px rgba($danger-color, 0.1);
+      }
+    }
+
     // Remove spinner arrows for number inputs
     &[type="number"] {
       -moz-appearance: textfield;

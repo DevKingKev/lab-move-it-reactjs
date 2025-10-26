@@ -10,6 +10,7 @@ import {
 } from "../store/slices/preOfferSlice"
 import { useLazyGetRateQuery } from "../services/rateAPI"
 import { calculateDistanceFromAddresses } from "../utils/distanceUtils"
+import { isValidEmail, isValidPhoneNumber, hasValue } from "../utils/validators"
 import {
   Card,
   FormSection,
@@ -28,6 +29,20 @@ const PreOffer = () => {
   const isFormDataUnchanged = useAppSelector(selectIsFormDataUnchanged)
   const [getRateQuery, { isLoading: isLoadingRate }] = useLazyGetRateQuery()
   const [error, setError] = useState<string | null>(null)
+
+  // Check if all required fields are valid
+  const isFormValid = () => {
+    return (
+      hasValue(formData.firstName) &&
+      hasValue(formData.lastName) &&
+      isValidEmail(formData.email) &&
+      isValidPhoneNumber(formData.phoneNumber) &&
+      hasValue(formData.addressFrom) &&
+      hasValue(formData.addressTo) &&
+      formData.livingAreaInM2 !== null &&
+      formData.livingAreaInM2 > 0
+    )
+  }
 
   const handleFieldChange = (
     field: keyof typeof formData,
@@ -107,6 +122,7 @@ const PreOffer = () => {
                 }}
                 type="text"
                 required
+                validate={hasValue}
               />
               <InputField
                 label="Last Name"
@@ -116,6 +132,7 @@ const PreOffer = () => {
                 }}
                 type="text"
                 required
+                validate={hasValue}
               />
               <InputField
                 label="E-mail"
@@ -125,6 +142,7 @@ const PreOffer = () => {
                 }}
                 type="email"
                 required
+                validate={isValidEmail}
               />
               <InputField
                 label="Phone Number"
@@ -134,6 +152,7 @@ const PreOffer = () => {
                 }}
                 type="tel"
                 required
+                validate={isValidPhoneNumber}
               />
             </FormSection>
           </Card>
@@ -150,6 +169,7 @@ const PreOffer = () => {
                 type="text"
                 placeholder="Address, zipcode, city"
                 required
+                validate={hasValue}
               />
               <InputField
                 label="To which address are you moving?"
@@ -160,6 +180,7 @@ const PreOffer = () => {
                 type="text"
                 placeholder="Address, zipcode, city"
                 required
+                validate={hasValue}
               />
             </FormSection>
           </Card>
@@ -176,6 +197,9 @@ const PreOffer = () => {
                 type="number"
                 min={0}
                 required
+                validate={value =>
+                  value !== null && typeof value === "number" && value > 0
+                }
               />
               <InputField
                 label="Any ancillary space, attic, forecourt, etc. in sqm"
@@ -213,7 +237,11 @@ const PreOffer = () => {
           {/* Submit Button */}
           <div className={styles.preOffer__buttonContainer}>
             {error && <p className={styles.preOffer__error}>{error}</p>}
-            <Button type="submit" fullWidth disabled={isLoadingRate}>
+            <Button
+              type="submit"
+              fullWidth
+              disabled={isLoadingRate || !isFormValid()}
+            >
               {isLoadingRate ? "Calculating..." : "Request an offer"}
             </Button>
           </div>

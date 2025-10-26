@@ -17,9 +17,7 @@ const Layout = () => {
       </main>
 
       <footer className={styles.layout__footer}>
-        <div className={styles["layout__footer-content"]}>
-          <p>&copy; {new Date().getFullYear()} Move-It. All rights reserved.</p>
-        </div>
+        <div className={styles["layout__footer-content"]}></div>
       </footer>
     </div>
   )

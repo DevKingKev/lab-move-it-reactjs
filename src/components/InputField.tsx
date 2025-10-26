@@ -29,6 +29,10 @@ type InputFieldProps = {
   step?: number
   /** Optional debounce delay in ms (default: 500) */
   debounceDelay?: number
+  /** Optional error state */
+  error?: boolean
+  /** Optional validation function */
+  validate?: (value: string | number | null) => boolean
 }
 
 const InputField = ({
@@ -43,8 +47,11 @@ const InputField = ({
   max,
   step,
   debounceDelay = 500,
+  error = false,
+  validate,
 }: InputFieldProps) => {
   const [localValue, setLocalValue] = useState<string | number | null>(value)
+  const [hasInteracted, setHasInteracted] = useState(false)
 
   // Update local value when prop value changes
   useEffect(() => {
@@ -66,12 +73,29 @@ const InputField = ({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (type === "number") {
-      const newValue = e.target.value === "" ? null : Number(e.target.value)
-      setLocalValue(newValue)
+      // For number inputs, only allow valid numbers
+      const inputValue = e.target.value
+      if (inputValue === "") {
+        setLocalValue(null)
+      } else {
+        const numValue = Number(inputValue)
+        if (!isNaN(numValue)) {
+          setLocalValue(numValue)
+        }
+      }
     } else {
       setLocalValue(e.target.value)
     }
   }
+
+  const handleBlur = () => {
+    setHasInteracted(true)
+  }
+
+  // Determine if field should show error state
+  const isInvalid =
+    hasInteracted && (error || (validate && !validate(localValue)))
+  const errorClass = isInvalid ? styles["inputField__input--error"] : ""
 
   return (
     <div className={`${styles.inputField} ${className ?? ""}`}>
@@ -83,9 +107,10 @@ const InputField = ({
         type={type}
         value={localValue ?? ""}
         onChange={handleChange}
+        onBlur={handleBlur}
         placeholder={placeholder}
         required={required}
-        className={styles.inputField__input}
+        className={`${styles.inputField__input} ${errorClass}`}
         min={min}
         max={max}
         step={step}
