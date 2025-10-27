@@ -28,10 +28,13 @@ npx tiged reduxjs/redux-templates/packages/vite-template-redux my-app
 
 ## Considerations
 
-- Design document has been used. As the instructions did not specify mobile-first or other adjustments I created a desktop version which should be somewhat mobile-briendly but no effort has been put towards that end.
+- Design document has been used. As the instructions did not specify mobile-first or other adjustments I created a desktop version which should be somewhat mobile-friendly but no effort has been put towards that end.
 - The font-family was unclear to me from the figma design so I chose the closest I could get to it. This is not a problem in practice.
 - There are some styling issues which could be improved (e.g. spacing between the action buttons on the confirmation page) but I ran out of the allotted time and it is not a high-priority issue.
 - The application has working tests, which are very helpful when refactoring.
+- Efforts have been made to as much as possible use best-practice approaches.
+- The application builds but I have not tested the build. It has been tested on "npm run dev". The tests all run and pass.
+
 
 ## Saving price proposals
 Some consideration has been given to the saving of price proposals. 
