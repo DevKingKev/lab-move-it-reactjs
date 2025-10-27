@@ -95,5 +95,9 @@
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     margin-top: 24px;
+
+    button {
+      font-size: $font-size-xxl;
+    }
   }
 }

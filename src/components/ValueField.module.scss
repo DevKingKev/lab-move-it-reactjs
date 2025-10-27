@@ -20,6 +20,7 @@
     font-size: $font-size-md;
     color: $moveit-text-dark;
     padding: $spacing-sm 0;
+    text-transform: uppercase;
   }
 
   &__email {
@@ -29,6 +30,7 @@
     padding: $spacing-sm 0;
     cursor: pointer;
     transition: color 0.2s ease;
+    text-transform: uppercase;
 
     &:hover {
       color: $moveit-header-blue;

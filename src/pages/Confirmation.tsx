@@ -112,7 +112,7 @@ const Confirmation = () => {
 
         {/* Action Buttons */}
         <div className={styles.confirmation__actions}>
-          <Button variant="secondary" onClick={handleEditDetails}>
+          <Button variant="primary" onClick={handleEditDetails}>
             Edit details
           </Button>
           <Button variant="primary" onClick={handleConfirmSubmit}>
