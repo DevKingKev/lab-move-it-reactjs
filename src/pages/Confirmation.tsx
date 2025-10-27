@@ -5,6 +5,7 @@ import {
   selectLastSubmittedData,
 } from "../store/slices/preOfferSlice"
 import { calculateDistanceFromAddresses } from "../utils/distanceUtils"
+import { formatPrice } from "../utils/currencyUtils"
 import { Card, FormSection, ValueField, Button } from "../components"
 import styles from "./Confirmation.module.scss"
 
@@ -41,7 +42,9 @@ const Confirmation = () => {
     <div className={styles.confirmation}>
       <div className={styles.confirmation__container}>
         <div className={styles.confirmation__header}>
-          <div className={styles.confirmation__successIcon}>✓</div>
+          <div className={styles.confirmation__successIcon}>
+            <img src="/img/check_circle.svg" alt="Success" />
+          </div>
           <h2 className={styles.confirmation__title}>Offer calculated!</h2>
         </div>
 
@@ -50,7 +53,7 @@ const Confirmation = () => {
             Your estimated price is:
           </p>
           <p className={styles.confirmation__priceValue}>
-            ${estimatedPrice.value} {estimatedPrice.currency}
+            {formatPrice(estimatedPrice.value, estimatedPrice.currency)}
           </p>
           <p className={styles.confirmation__priceTax}>incl. taxes</p>
         </div>
