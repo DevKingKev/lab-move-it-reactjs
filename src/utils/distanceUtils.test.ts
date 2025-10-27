@@ -154,12 +154,13 @@ describe( "distanceUtils", () => {
     } );
 
     describe( "calculateDistanceFromAddresses", () => {
-        it( "should parse and calculate distance between full address strings", () => {
+        it( "should parse and calculate distance between full address strings (rounded up)", () => {
             const distance = calculateDistanceFromAddresses(
                 "Wolfgatan 1, 11021, Stockholm",
                 "Wolfgatan 2, 11021, Stockholm"
             );
-            expect( distance ).toBe( 0.01 );
+            // 0.01km rounds up to 1km
+            expect( distance ).toBe( 1 );
         } );
 
         it( "should handle postal code changes", () => {
@@ -178,6 +179,14 @@ describe( "distanceUtils", () => {
             const distance2 = calculateDistanceFromAddresses( address1, address2 );
 
             expect( distance1 ).toBe( distance2 );
+        } );
+
+        it( "should return 0 for identical addresses", () => {
+            const distance = calculateDistanceFromAddresses(
+                "Wolfgatan 1, 11021, Stockholm",
+                "Wolfgatan 1, 11021, Stockholm"
+            );
+            expect( distance ).toBe( 0 );
         } );
     } );
 } );

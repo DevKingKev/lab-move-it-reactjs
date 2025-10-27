@@ -55,12 +55,12 @@ const PreOffer = () => {
     e.preventDefault()
     setError(null)
 
-    // Convert null values to 0 before submitting
+    // Convert null values to 0 and round up all numeric values for API
     const submissionData = {
       ...formData,
-      livingAreaInM2: formData.livingAreaInM2 ?? 0,
-      extraAreaInM2: formData.extraAreaInM2 ?? 0,
-      numbersOfPianos: formData.numbersOfPianos ?? 0,
+      livingAreaInM2: Math.ceil(formData.livingAreaInM2 ?? 0),
+      extraAreaInM2: Math.ceil(formData.extraAreaInM2 ?? 0),
+      numbersOfPianos: Math.ceil(formData.numbersOfPianos ?? 0),
     }
 
     // Check if we have a cached calculation with identical data

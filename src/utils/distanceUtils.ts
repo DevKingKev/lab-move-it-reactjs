@@ -131,7 +131,7 @@ export function parseFullAddress ( address: string ): {
  * Calculates distance between two full address strings
  * @param fromAddress - Full address string (e.g., "Wolfgatan 1, 11021, Stockholm")
  * @param toAddress - Full address string (e.g., "Wolfgatan 2, 11021, Stockholm")
- * @returns Distance in kilometers
+ * @returns Distance in kilometers (rounded up to next integer)
  */
 export function calculateDistanceFromAddresses (
     fromAddress: string,
@@ -140,7 +140,7 @@ export function calculateDistanceFromAddresses (
     const from = parseFullAddress( fromAddress );
     const to = parseFullAddress( toAddress );
 
-    return calculateDistance(
+    const distance = calculateDistance(
         from.street,
         from.postalCode,
         from.city,
@@ -148,6 +148,9 @@ export function calculateDistanceFromAddresses (
         to.postalCode,
         to.city
     );
+
+    // Round up to next integer for API compatibility
+    return Math.ceil( distance );
 }
 
 
