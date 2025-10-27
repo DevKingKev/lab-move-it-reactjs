@@ -14,14 +14,14 @@ const OfferSubmitted = () => {
 
   // If no last submitted data, redirect to pre-offer
   if (!lastSubmittedData) {
-    void navigate("/")
+    void navigate("/pre-offer")
     return null
   }
 
   const handleMakeAnotherOffer = () => {
     // Reset the pre-offer state to start fresh
     dispatch(resetForm())
-    void navigate("/")
+    void navigate("/pre-offer")
   }
 
   return (

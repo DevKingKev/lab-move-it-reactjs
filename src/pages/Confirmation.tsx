@@ -16,7 +16,7 @@ const Confirmation = () => {
 
   // If no estimated price or last submitted data, redirect to pre-offer
   if (!estimatedPrice || !lastSubmittedData) {
-    void navigate("/")
+    void navigate("/pre-offer")
     return null
   }
 
@@ -30,7 +30,7 @@ const Confirmation = () => {
   )
 
   const handleEditDetails = () => {
-    void navigate("/")
+    void navigate("/pre-offer")
   }
 
   const handleConfirmSubmit = () => {

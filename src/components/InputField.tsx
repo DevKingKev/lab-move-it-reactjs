@@ -99,9 +99,7 @@ const InputField = ({
 
   return (
     <div className={`${styles.inputField} ${className ?? ""}`}>
-      <label className={styles.inputField__label}>
-        {label.toUpperCase()}
-      </label>
+      <label className={styles.inputField__label}>{label.toUpperCase()}</label>
       <input
         type={type}
         value={localValue ?? ""}
