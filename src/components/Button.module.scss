@@ -3,14 +3,14 @@
 
 .button {
   flex: 0 0 auto;
-  padding: $spacing-md $spacing-xl;
+  padding: $spacing-lg $spacing-xl;
   border: none;
-  font-size: $font-size-md;
+  height: $header-full-height;
+  font-size: $font-size-xl;
   font-weight: $font-weight-bold;
   font-family: $font-family-base;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-transform: capitalize;
 
   &--primary {
     background-color: $moveit-header-blue;

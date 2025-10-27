@@ -32,6 +32,7 @@
     gap: $spacing-sm;
     padding: $spacing-sm $spacing-lg;
     border-radius: $border-radius-sm;
+    height: 75px;
      cursor: pointer;
     transition: all 0.2s ease;
     position: relative;
@@ -63,24 +64,27 @@
     pointer-events: none;
   }
 
+  $circle-size: 60px;
+  $circle-size-coloured: $circle-size - 12px;
   &__circle {
     flex: 0 0 auto;
-    width: 24px;
-    height: 24px;
+    width: $circle-size;
+    height: $circle-size;
     border: 2px solid $moveit-header-blue;
     border-radius: 50%;
     background-color: $moveit-white;
     position: relative;
     transition: all 0.2s ease;
 
+
     &::after {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 10%;
+      left: 10%;
       transform: translate(-50%, -50%) scale(0);
-      width: 12px;
-      height: 12px;
+      width: $circle-size-coloured;
+      height: $circle-size-coloured;
       border-radius: 50%;
       background-color: $moveit-header-blue;
       opacity: 0;

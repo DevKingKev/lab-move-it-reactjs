@@ -1,36 +1,38 @@
 @import '../styles/variables';
 @import '../styles/mixins';
 
+$header-full-height: 85px;
+
 .card {
   flex: 0 0 auto;
   background-color: $moveit-white;
   box-shadow: $shadow-md;
-  overflow: hidden;
+  overflow: visible;
   margin-bottom: $spacing-lg;
 
   &__header {
     background-color: $moveit-card-header-blue;
-    padding: $spacing-md $spacing-lg;
+    padding: $spacing-lg $spacing-xl;
     position: relative;
+    height: 25px;
   }
 
   &__step {
     position: absolute;
-    left: $spacing-md;
-    top: $spacing-md;
-    width: 40px;
-    height: 40px;
+    left: -$header-full-height;
+    top: 0;
+    width: $header-full-height;
+    height: $header-full-height;
     background-color: $moveit-header-blue;
     color: $moveit-white;
     @include flex-center;
-    font-size: $font-size-lg;
+    font-size: $font-size-xl;
     font-weight: $font-weight-bold;
   }
 
   &__title {
     margin: 0;
-    padding-left: 56px; // Space for step number
-    font-size: $font-size-lg;
+    font-size: $font-size-xl;
     font-weight: $font-weight-bold;
     color: $moveit-text-dark;
   }
@@ -42,7 +44,7 @@
 
   &__content {
     flex: 0 0 auto;
-    padding: $spacing-lg;
+    padding: $spacing-xl;
     background-color: $moveit-form-blue;
   }
 
