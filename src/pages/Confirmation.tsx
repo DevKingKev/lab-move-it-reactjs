@@ -34,8 +34,8 @@ const Confirmation = () => {
   }
 
   const handleConfirmSubmit = () => {
-    // TODO: Implement submission logic
-    console.log("Offer confirmed and submitted")
+    // Navigate to the offer submitted page
+    void navigate("/offer-submitted")
   }
 
   return (

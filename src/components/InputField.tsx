@@ -101,7 +101,6 @@ const InputField = ({
     <div className={`${styles.inputField} ${className ?? ""}`}>
       <label className={styles.inputField__label}>
         {label.toUpperCase()}
-        {required && <span className={styles.inputField__required}>*</span>}
       </label>
       <input
         type={type}
