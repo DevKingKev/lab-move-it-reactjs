@@ -11,10 +11,12 @@ $header-full-height: 85px;
   margin-bottom: $spacing-lg;
 
   &__header {
+    height: $header-full-height;
     background-color: $moveit-card-header-blue;
-    padding: $spacing-lg $spacing-xl;
+    padding: 0 $spacing-xl;
     position: relative;
-    height: 25px;
+    display: flex;
+    align-items: center;
   }
 
   &__step {
@@ -26,13 +28,13 @@ $header-full-height: 85px;
     background-color: $moveit-header-blue;
     color: $moveit-white;
     @include flex-center;
-    font-size: $font-size-xl;
+    font-size: $font-size-xxl;
     font-weight: $font-weight-bold;
   }
 
   &__title {
     margin: 0;
-    font-size: $font-size-xl;
+    font-size: $font-size-xxl;
     font-weight: $font-weight-bold;
     color: $moveit-text-dark;
   }

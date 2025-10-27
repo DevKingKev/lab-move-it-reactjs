@@ -108,7 +108,7 @@ const PreOffer = () => {
   return (
     <div className={styles.preOffer}>
       <div className={styles.preOffer__container}>
-        <h2 className={styles.preOffer__title}>Pre-offer for home moving</h2>
+        <h1 className={styles.preOffer__title}>Pre-offer for home moving</h1>
 
         <form className={styles.preOffer__form} onSubmit={handleSubmit}>
           {/* Step 1: Contact Details */}
