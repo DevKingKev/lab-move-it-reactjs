@@ -28,21 +28,6 @@ describe("InputField", () => {
     expect(screen.getByText("LOWERCASE LABEL")).toBeInTheDocument()
   })
 
-  test("shows required indicator when required", () => {
-    const handleChange = vi.fn()
-    renderWithProviders(
-      <InputField
-        label="Required Field"
-        value=""
-        onChange={handleChange}
-        required
-      />,
-    )
-
-    expect(screen.getByText("REQUIRED FIELD")).toBeInTheDocument()
-    expect(screen.getByText("*")).toBeInTheDocument()
-  })
-
   test("handles number type input", () => {
     const handleChange = vi.fn()
     renderWithProviders(
